@@ -28,25 +28,7 @@ app.get('', (req, res) => {
     })
 })
 
-app.get('/weather/:city', (req, res) => {
-    const city = req.params.city
-
-    weather(city, (error, response) => {
-        if (error) {
-            res.send({error: error})
-        } else {
-            const {temperature, humidity} = response
-            res.send({
-                city: city,
-                temperature: temperature,
-                humidity: humidity
-            })
-        }
-    })
-
-})
-
-app.get('/weather', (req, res) => {
+app.get('/queries', (req, res) => {
     res.send(req.query)
 })
 
@@ -71,6 +53,25 @@ app.get('/grapes', (req, res) => {
         }
     ])
 })
+
+app.get('/:city', (req, res) => {
+    const city = req.params.city
+
+    weather(city, (error, response) => {
+        if (error) {
+            res.send({error: error})
+        } else {
+            const {temperature, humidity} = response
+            res.send({
+                city: city,
+                temperature: temperature,
+                humidity: humidity
+            })
+        }
+    })
+
+})
+
 
 app.get('*', (req, res) => {
     res.send("Ye raha 404")
